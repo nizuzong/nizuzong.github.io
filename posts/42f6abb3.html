@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>函数式编程范式 | 林深时见鹿</title><meta name="author" content="林深"><meta name="copyright" content="林深"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="高阶函数 可以把函数作为参数传递给另一个函数 可以把函数作为另一个函数的返回结果  函数作为返回值 123456789101112131415161718192021222324252627282930&#x2F;&#x2F; 函数作为返回值function makeFn () &amp;#123;  let msg &#x3D; &amp;#x27;hello function&amp;#x27;;  return function () &amp;#12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数式编程范式">
+<meta property="og:url" content="https://nizuzong.github.io/posts/42f6abb3.html">
+<meta property="og:site_name" content="林深时见鹿">
+<meta property="og:description" content="高阶函数 可以把函数作为参数传递给另一个函数 可以把函数作为另一个函数的返回结果  函数作为返回值 123456789101112131415161718192021222324252627282930&#x2F;&#x2F; 函数作为返回值function makeFn () &amp;#123;  let msg &#x3D; &amp;#x27;hello function&amp;#x27;;  return function () &amp;#12">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://w.wallhaven.cc/full/6o/wallhaven-6oxgp6.jpg">
+<meta property="article:published_time" content="2022-08-04T14:46:46.000Z">
+<meta property="article:modified_time" content="2022-08-04T14:54:04.725Z">
+<meta property="article:author" content="林深">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://w.wallhaven.cc/full/6o/wallhaven-6oxgp6.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://nizuzong.github.io/posts/42f6abb3"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '函数式编程范式',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-04 22:54:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/index.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="/clock/css/clock.css"/><script src="https://www.jq22.com/jquery/jquery-3.3.1.js"></script><script src="https://cyan-blog.oss-cn-shenzhen.aliyuncs.com/cdn/js/three.min.js"></script><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="cherry-container" id="jsi-cherry-container"></div><div class="canvas-container" id="canvas"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://w.wallhaven.cc/full/6o/wallhaven-6oxgp6.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">林深时见鹿</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">函数式编程范式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-04T14:46:46.000Z" title="发表于 2022-08-04 22:46:46">2022-08-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-04T14:54:04.725Z" title="更新于 2022-08-04 22:54:04">2022-08-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">49k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>NaN:aN分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="函数式编程范式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h1><ul>
+<li>可以把函数作为参数传递给另一个函数</li>
+<li>可以把函数作为另一个函数的返回结果</li>
+</ul>
+<p><strong>函数作为返回值</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数作为返回值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeFn</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> msg = <span class="string">&#x27;hello function&#x27;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(msg)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> fn = makeFn();</span><br><span class="line">fn();</span><br><span class="line">makeFn()();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// once</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">once</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> done = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!done) &#123;</span><br><span class="line">      done = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">return</span> fn.apply(<span class="built_in">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> pay = once(<span class="function"><span class="keyword">function</span> (<span class="params">money</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(money);</span><br><span class="line">&#125;)</span><br><span class="line">pay(<span class="number">5</span>)</span><br><span class="line">pay(<span class="number">5</span>)</span><br><span class="line">pay(<span class="number">5</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="常用的高阶函数"><a href="#常用的高阶函数" class="headerlink" title="常用的高阶函数"></a>常用的高阶函数</h1><h2 id="高阶函数的意义"><a href="#高阶函数的意义" class="headerlink" title="高阶函数的意义"></a>高阶函数的意义</h2><ul>
+<li>抽象可以帮屏蔽细节，只需要关注与我们的目标</li>
+<li>高阶函数是用来抽象通用的问题</li>
+</ul>
+<p><strong>filter</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span> (<span class="params">array, fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> retult = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (fn(array[i])) &#123;</span><br><span class="line">      retult.push(array[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> retult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>forEach</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forEach</span> (<span class="params">array, fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">    fn(array[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>map</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> map = <span class="function">(<span class="params">array, fn</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> result = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> array) &#123;</span><br><span class="line">    result.push(fn(value));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>every</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断数组中的每一个值满足我们指定的条件</span></span><br><span class="line"><span class="keyword">const</span> every = <span class="function">(<span class="params">array, fn</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">of</span> array) &#123;</span><br><span class="line">    flag = fn(val);</span><br><span class="line">    <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>some</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断数组中有一个值满足我们指定的条件</span></span><br><span class="line"><span class="keyword">const</span> some = <span class="function">(<span class="params">array, fn</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">of</span> array) &#123;</span><br><span class="line">    flag = fn(val);</span><br><span class="line">    <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> falg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><ul>
+<li>函数和其周围的状态（词法环境）引用捆绑在一起形成闭包</li>
+<li>可以在另一个作用域中调用一个函数的内部函数并访问到该函数的作用域中的成员</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数作为返回值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> msg = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(msg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn = MyFn();</span><br><span class="line">fn();</span><br><span class="line"></span><br><span class="line"><span class="comment">// once函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">once</span> (<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">      flag = <span class="literal">true</span>;</span><br><span class="line">      fn.applay(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> pay = <span class="function"><span class="title">once</span>(<span class="params">money</span>)</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(money);</span><br><span class="line">&#125;;</span><br><span class="line">pay(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p>闭包的本质：函数在执行的时候会放到一个执行栈上，当函数执行完毕之后会从执行栈上移除，<code>但是堆上的作用域成员，因为被外部引用不能释放</code>，因此内部函数依然可以访问外部函数的成员。</p>
+<h1 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ol>
+<li>纯函数：<code>相同的输入永远会得到相同的输出</code>，而且没有任何可观察的副作用</li>
+<li>纯函数就类似数学中的函数，y=f(x);</li>
+<li>数组中的<code>slice</code>和<code>splice</code>，分别是纯函数和不纯的函数<ol>
+<li><code>splice</code>返回数组中指定的部分，不会改变原数组</li>
+<li><code>splice</code>对数组进行操作返回该数组，会改变原数组</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="comment">// slice</span></span><br><span class="line"><span class="built_in">console</span>.log(nums.slice(<span class="number">0</span>,<span class="number">4</span>));</span><br><span class="line"><span class="comment">// [1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// splice</span></span><br><span class="line"><span class="built_in">console</span>.log(nums.splice(<span class="number">0</span>,<span class="number">2</span>));</span><br><span class="line"><span class="comment">// [1,2,3]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>自定义纯函数</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">n1, n2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> n1 + n2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">1</span>,<span class="number">2</span>));</span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">1</span>,<span class="number">2</span>));</span><br><span class="line"><span class="built_in">console</span>.log(sum(<span class="number">1</span>,<span class="number">2</span>));</span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>函数式编程不会保留计算结果，所以变量是不可变的（无状态的）</li>
+<li>我们可以把一个函数的执行结果交给另一个函数去处理</li>
+</ol>
+<h2 id="纯函数的优势"><a href="#纯函数的优势" class="headerlink" title="纯函数的优势"></a>纯函数的优势</h2><ul>
+<li><p>可缓存</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟mmeoize实现</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">r</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.PI * r * r</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">memoize</span>(<span class="params">f</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> cache = &#123;&#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> key = <span class="built_in">JSON</span>.stringify(<span class="built_in">arguments</span>);</span><br><span class="line">    cache[key] = cache[key] || f.apply(f, <span class="built_in">arguments</span>)</span><br><span class="line">    <span class="keyword">return</span> cache[key];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>可测试</p>
+</li>
+<li><p>并行处理</p>
+<ul>
+<li>在多线程环境下并行操作共享的内存数据很可能会出现意外情况</li>
+<li>纯函数不需要访问共享的内存数据，所以在并行环境下可以任意运行纯函数</li>
+</ul>
+</li>
+</ul>
+<h2 id="副作用"><a href="#副作用" class="headerlink" title="副作用"></a>副作用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不是纯函数</span></span><br><span class="line"><span class="keyword">let</span> mini = <span class="number">18</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkAge</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> age &gt;= mini</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 纯函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkAge</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> mini = <span class="number">18</span>;</span><br><span class="line">  <span class="keyword">return</span> age &gt;= mini;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>副作用让一个函数变得不纯，纯函数是根据相同的输入返回相同的输出，如果函数依赖于外部的状态就无法保证输出相同，就会带来副作用。</p>
+<p>所有的外部交互都有可能带来副作用，副作用也使得方法通用性下降不适合扩展和可重用性，同时副作用也会带来安全隐患，给程序带来不确定性，但是副作用不可能完全禁止，尽可能控制它们在可控范围内发剩。</p>
+<h2 id="3-柯里化"><a href="#3-柯里化" class="headerlink" title="3.柯里化"></a>3.柯里化</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkAge</span> (<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> age = <span class="number">18</span>;</span><br><span class="line">  <span class="keyword">return</span> age &gt;= num</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数的柯里化</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkAge1</span> (<span class="params">min</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> age &gt;= min</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> age1 = checkAge1(<span class="number">18</span>);</span><br><span class="line"><span class="built_in">console</span>.log(age1(<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当一个函数有多个参数的时候先传递一部分参数（这部分参数以后永远不变）</li>
+<li>然后返回一个新的函数接收剩余的参数，返回结果</li>
+</ul>
+<h2 id="4-PointFree"><a href="#4-PointFree" class="headerlink" title="4.PointFree"></a>4.PointFree</h2><p>我们可以把数据处理的过程定义成与数据无关的合成运算，不需要用到代表数据的那个参数，只需要把简单的运算步骤合成到一起，在使用这种模式之前我们需要定义一些辅助的基本运算函数</p>
+<ul>
+<li>不需要指明处理的数据</li>
+<li>只需要合成运算过程</li>
+<li>需要定义一些辅助的基运算函数</li>
+</ul>
+<h2 id="5-Functor-函子"><a href="#5-Functor-函子" class="headerlink" title="5.Functor (函子)"></a>5.Functor (函子)</h2><ul>
+<li>容器：包含值和值得变形关系（这个变形关系就是函数）</li>
+<li>函子：是一个特殊的容器，通过一个普通的对象来实现，该对象具有 map 方法，map方法可以运行一个函数对值进行处理（变形关系）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Container</span> </span>&#123;</span><br><span class="line">  <span class="title">constructor</span> (<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>._value = value;</span><br><span class="line">  &#125;</span><br><span class="line">  map (fn) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Container(fn(<span class="built_in">this</span>._value));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sum = <span class="keyword">new</span> Container(<span class="number">5</span>)</span><br><span class="line">.map(<span class="function"><span class="params">item</span> =&gt;</span> item + <span class="number">1</span>)</span><br><span class="line">.map(<span class="function"><span class="params">item</span> =&gt;</span> item * item)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sum)</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结</strong></p>
+<ul>
+<li>函数式编程的运算不直接操作值，而是由函子完成</li>
+<li>函子就是一个实现了 <code>map</code> 契约的对象</li>
+<li>我们可以把函子想象成一个盒子，这个盒子里封装了一个值</li>
+<li>想要处理盒子中的值，我们需要给盒子的<code>map</code>方法传递一个处理值得函数（纯函数），由这个函数对值进行处理</li>
+<li>最终<code>map</code>方法返回一个包含新值的盒子（函子）</li>
+</ul>
+<h2 id="5-MayBe-函子"><a href="#5-MayBe-函子" class="headerlink" title="5.MayBe (函子)"></a>5.MayBe (函子)</h2><p>MayBe函子的作用就是可以对外部的空值做处理（控制副作用在允许的范围）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MayBe</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">of</span> (value) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MayBe(value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title">constructor</span> (<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>._value = value;</span><br><span class="line">  &#125;</span><br><span class="line">  map (fn) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.isNothing() ? MayBe.of(<span class="literal">null</span>) : MayBe.of(fn(<span class="built_in">this</span>._value));</span><br><span class="line">  &#125;</span><br><span class="line">  isNothing () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>._value === <span class="literal">null</span> || <span class="built_in">this</span>._value === <span class="literal">undefined</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> r1 = MayBe.of(<span class="string">&#x27;hello world!&#x27;</span>)</span><br><span class="line">.map(<span class="function"><span class="params">str</span> =&gt;</span> str.toUpperCase())</span><br><span class="line"><span class="keyword">let</span> r2 = MayBe.of(<span class="literal">undefined</span>)</span><br><span class="line">.map(<span class="function"><span class="params">str</span> =&gt;</span> str.toUpperCase())</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(r1)</span><br><span class="line"><span class="built_in">console</span>.log(r2)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-Either-函子"><a href="#6-Either-函子" class="headerlink" title="6.Either (函子)"></a>6.Either (函子)</h2><ul>
+<li>两者中的任何一个，类似于<code>if...else</code>的处理</li>
+<li>异常会让函数变得不纯，<code>Either</code>函子可以用来做异常处理</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Left</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">of</span> (value) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Left(value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">value</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>._value = value;</span><br><span class="line">  &#125;</span><br><span class="line">  map (fn) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Right</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">of</span> (value) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Right(value)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">value</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>._value = value;</span><br><span class="line">  &#125;</span><br><span class="line">  map (fn) &#123;</span><br><span class="line">    <span class="keyword">return</span> Right.of(fn(<span class="built_in">this</span>._value));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseJson</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Right.of(<span class="built_in">JSON</span>.parse(str));</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="keyword">return</span> Left.of(&#123; <span class="attr">error</span>: e.message &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result1 = parseJson(<span class="string">&#x27;&#123;name: ls&#125;&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result1); <span class="comment">// Left &#123; _value: &#123; error: &quot;Unexpected token &#x27; in JSON at position 1&quot; &#125; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result2 = parseJson(<span class="string">&#x27;&#123;&quot;name&quot;: &quot;ls&quot;&#125;&#x27;</span>)</span><br><span class="line">  .map(<span class="function"><span class="params">item</span> =&gt;</span> item.name.toUpperCase())</span><br><span class="line"><span class="built_in">console</span>.log(result2); <span class="comment">// Right</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="7-IO函子"><a href="#7-IO函子" class="headerlink" title="7.IO函子"></a>7.IO函子</h1><ul>
+<li>IO函子中 的<code>_value</code>是一个函数，这里是把函数作为值来处理</li>
+<li>IO函子可以把不纯的动作存储到<code>_value</code>中，延迟执行这个不纯的操作（惰性执行），包装当前的操作纯</li>
+<li>把不纯的操作交给调用者来处理</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fp = <span class="built_in">require</span>(<span class="string">&#x27;lodash/fp&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IO</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">of</span> (x) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> IO(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> x;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">fn</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>._value = fn</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  map (fn) &#123;</span><br><span class="line">    <span class="comment">// 把当前的 value 和传入的 fn 组合成一个新的函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> IO(fp.flowRight(fn, <span class="built_in">this</span>._value));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span>  p = IO.of(process)</span><br><span class="line">.map(<span class="function"><span class="params">p</span> =&gt;</span>  p.execPath)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p); <span class="comment">// IO &#123; _value: [Function (anonymous)] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(p._value()); <span class="comment">// 当前node执行路径</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Task异步执行"><a href="#Task异步执行" class="headerlink" title="Task异步执行"></a>Task异步执行</h2><ul>
+<li>异步任务的实现过于复杂，我们使用<code>folktale</code>中的 <code>Task</code>来掩饰</li>
+<li>folktale 一个标准的函数试变成库</li>
+<li>和lodash、ramda不同的是，没有 提供很多功能函数</li>
+</ul>
+<h1 id="什么是函数式编程"><a href="#什么是函数式编程" class="headerlink" title="什么是函数式编程"></a>什么是函数式编程</h1><p>函数式编程(function Programming, FP)是编程范式之一，我们常听说的变成范式还有<code>面向过程编程</code>、<code>面向对象编程</code>。</p>
+<ul>
+<li>面向对象编程的思维方式：把现实世界中的事物抽象成程序世界中的类和对象，通过封装、继承和多态来演示事物和事件的联系</li>
+<li>函数式编程的思维方式：把现实世界的事物和事物之间的<code>联系</code>抽象到程序世界（对运算过程进行抽象）<ul>
+<li>程序的本质：根据输入通过某中运算获得相应的输出，程序开发过程中会涉及很多有输入和输出的函数</li>
+<li>x -&gt; f(联系、映射)-&gt; y, y=f(x)</li>
+<li><code>函数式编程中的函数指的不是程序中的函数（方法）</code>，而是数学中的函数即映射关系，例如：```y = sin(x)，x和y的关系</li>
+<li><code>相同的输入始终要得到相同的输出</code>（纯函数）</li>
+<li>函数式编程用来描述数据（函数）之间的映射</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非函数式</span></span><br><span class="line"><span class="keyword">let</span> num1 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> num2 = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">let</span> sum = num1 + num2;</span><br><span class="line"><span class="built_in">console</span>.log(sum);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">n1, n2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> n1 + n2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sum = add(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(sum);</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数是一等公民"><a href="#函数是一等公民" class="headerlink" title="函数是一等公民"></a>函数是一等公民</h2><h2 id="高阶函数-1"><a href="#高阶函数-1" class="headerlink" title="高阶函数"></a>高阶函数</h2><h2 id="闭包-1"><a href="#闭包-1" class="headerlink" title="闭包"></a>闭包</h2><h3 id="函数是一等公民-1"><a href="#函数是一等公民-1" class="headerlink" title="函数是一等公民"></a>函数是一等公民</h3><ul>
+<li>函数可以存储在变量中</li>
+<li>函数可以作为参数</li>
+<li>函数作为返回值</li>
+</ul>
+<p>在<code>javascript</code>中<code>函数就是一个普通的对象</code>（可以通过<code> new function()</code>），我们可以把函数存储到<code>变量</code>或者<code>数组</code>中，它还可以作为另一个函数的参数和返回值，甚至我们可以在程序运行的时候通过<code>new function(`alert(1)`)</code>来构造一个新的函数。</p>
+<h3 id="1-把函数赋值给变量"><a href="#1-把函数赋值给变量" class="headerlink" title="1.把函数赋值给变量"></a>1.把函数赋值给变量</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把函数赋值给变量</span></span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例</span></span><br><span class="line"><span class="keyword">const</span> BlogController = &#123;</span><br><span class="line">  index (posts) &#123; <span class="keyword">return</span> Views.index(posts) &#125;,</span><br><span class="line">  show (posts) &#123; <span class="keyword">return</span> Views.show(posts) &#125;,</span><br><span class="line">  create (attrs) &#123; <span class="keyword">return</span> Db.create(attrs) &#125;,</span><br><span class="line">  update (posts, attrs) &#123; <span class="keyword">return</span> Db.update(posts, attrs) &#125;,</span><br><span class="line">  destroy (post) &#123; <span class="keyword">return</span> Db.destroy(post) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 优化</span></span><br><span class="line"><span class="keyword">const</span> BlogController = &#123;</span><br><span class="line">  <span class="attr">index</span>: Views.index,</span><br><span class="line">  <span class="attr">show</span>: Views.show,</span><br><span class="line">  <span class="attr">create</span>: Db.create,</span><br><span class="line">  <span class="attr">update</span>: Db.update,</span><br><span class="line">  <span class="attr">destroy</span>: Db.destroy</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-高阶函数"><a href="#2-高阶函数" class="headerlink" title="2. 高阶函数"></a>2. 高阶函数</h2><ul>
+<li>可以把函数作为参数传递给另一个参数</li>
+<li>可以把函数作为另一个函数的返回结果</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forEach</span> (<span class="params">array, fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">    fn(array[i]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">forEach(arr, <span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span> (<span class="params">array, fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> retult = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (fn(array[i])) &#123;</span><br><span class="line">      retult.push(array[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> retult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-1高阶函数-函数作为返回值"><a href="#2-1高阶函数-函数作为返回值" class="headerlink" title="2.1高阶函数-函数作为返回值"></a>2.1高阶函数-函数作为返回值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> msg = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(msg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn = MyFn();</span><br><span class="line">fn();</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">MyFn()();</span><br><span class="line"></span><br><span class="line"><span class="comment">// once</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">once</span> (<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> flag = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!flag) &#123;</span><br><span class="line">      flag = <span class="literal">true</span>;</span><br><span class="line">      fn.applay(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> pay = <span class="function"><span class="title">once</span>(<span class="params">money</span>)</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(money);</span><br><span class="line">&#125;;</span><br><span class="line">pay(<span class="number">5</span>);</span><br><span class="line">pay(<span class="number">5</span>);</span><br><span class="line">pay(<span class="number">5</span>);</span><br><span class="line">pay(<span class="number">5</span>);</span><br><span class="line"><span class="comment">// 只执行一次</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2高阶函数的意义"><a href="#2-2高阶函数的意义" class="headerlink" title="2.2高阶函数的意义"></a>2.2高阶函数的意义</h2><p><strong>意义：</strong></p>
+<ul>
+<li>抽象可以帮我们屏蔽细节，只需要关注我们的目标</li>
+<li>高阶函数是用来抽象通用的问题</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 面向过程的方式</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arr[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 面向过程</span></span><br><span class="line"><span class="comment">// 使用之前封装的 forEach  filter</span></span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://nizuzong.github.io">林深</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://nizuzong.github.io/posts/42f6abb3.html">https://nizuzong.github.io/posts/42f6abb3.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://nizuzong.github.io" target="_blank">林深时见鹿</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://w.wallhaven.cc/full/6o/wallhaven-6oxgp6.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/140ab620.html" title="html&amp;css"><i class="fas fa-chevron-right next-icon"><div class="next-label">下一篇</div></i></a><div class="pagination-card"><img class="next-cover" src="https://w.wallhaven.cc/full/l3/wallhaven-l366yq.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">html&amp;css</div></div></div></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">林深</div><div class="author-info__description">不积跬步无以至千里</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/"><i class="fab fa-github"></i><span>github</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不积跬步无以至千里</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">常用的高阶函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">高阶函数的意义</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-number">3.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">纯函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">4.2.</span> <span class="toc-text">纯函数的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%AF%E4%BD%9C%E7%94%A8"><span class="toc-number">4.3.</span> <span class="toc-text">副作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="toc-number">4.4.</span> <span class="toc-text">3.柯里化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-PointFree"><span class="toc-number">4.5.</span> <span class="toc-text">4.PointFree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Functor-%E5%87%BD%E5%AD%90"><span class="toc-number">4.6.</span> <span class="toc-text">5.Functor (函子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-MayBe-%E5%87%BD%E5%AD%90"><span class="toc-number">4.7.</span> <span class="toc-text">5.MayBe (函子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Either-%E5%87%BD%E5%AD%90"><span class="toc-number">4.8.</span> <span class="toc-text">6.Either (函子)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-IO%E5%87%BD%E5%AD%90"><span class="toc-number">5.</span> <span class="toc-text">7.IO函子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Task%E5%BC%82%E6%AD%A5%E6%89%A7%E8%A1%8C"><span class="toc-number">5.1.</span> <span class="toc-text">Task异步执行</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">什么是函数式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%98%AF%E4%B8%80%E7%AD%89%E5%85%AC%E6%B0%91"><span class="toc-number">6.1.</span> <span class="toc-text">函数是一等公民</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-1"><span class="toc-number">6.2.</span> <span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%8C%85-1"><span class="toc-number">6.3.</span> <span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%98%AF%E4%B8%80%E7%AD%89%E5%85%AC%E6%B0%91-1"><span class="toc-number">6.3.1.</span> <span class="toc-text">函数是一等公民</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8A%8A%E5%87%BD%E6%95%B0%E8%B5%8B%E5%80%BC%E7%BB%99%E5%8F%98%E9%87%8F"><span class="toc-number">6.3.2.</span> <span class="toc-text">1.把函数赋值给变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-number">6.4.</span> <span class="toc-text">2. 高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">6.5.</span> <span class="toc-text">2.1高阶函数-函数作为返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">6.6.</span> <span class="toc-text">2.2高阶函数的意义</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 林深</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script src="/js/cherry.js" async></script><script async data-pjax src="/js/sky.js"></script><script src="/clock/js/vue.min.js"></script><script data-pjax src="/clock/js/clock.js"></script><script src="/js/fixed-pagination.js" async></script><script src="/js/sun_moon.js" async></script><script async src="/js/diytitle.js"></script><div class="aplayer no-destroy" data-id="5183531430" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show","#web_bg",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/artitalk/"]):not([href="/about/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover1.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/浏览器/&quot;);" href="javascript:void(0);">浏览器</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">react相关</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover2.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/react/&quot;);" href="javascript:void(0);">react</a><span class="categoryBar-list-count">3</span><span class="categoryBar-list-descr">egg</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover3.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/vue3/&quot;);" href="javascript:void(0);">vue3</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">浏览器</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover5.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/随笔/&quot;);" href="javascript:void(0);">随笔</a><span class="categoryBar-list-count">4</span><span class="categoryBar-list-descr">vue相关</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover6.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/flutter/&quot;);" href="javascript:void(0);">flutter</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">随笔</span></li><li class="categoryBar-list-item" style="background:url(https://w.wallhaven.cc/full/o3/wallhaven-o3pr99.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/工具函数/&quot;);" href="javascript:void(0);">工具函数</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">flutter</span></li><li class="categoryBar-list-item" style="background:url(https://w.wallhaven.cc/full/6o/wallhaven-6o83w7.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/egg/&quot;);" href="javascript:void(0);">egg</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">工具</span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/html-css/&quot;);" href="javascript:void(0);">html&amp;css</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '1s');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '2');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
